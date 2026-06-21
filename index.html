@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Father's Day Surprise ❤️</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:Arial,sans-serif;background:#f7f2e8;color:#333;touch-action:manipulation}
+.screen{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
+.hidden{display:none}
+.btn{padding:14px 24px;border:none;border-radius:999px;background:#a67c52;color:white;font-weight:bold;margin-top:20px;cursor:pointer}
+.counter{background:#fff;padding:10px 18px;border-radius:999px;margin-bottom:15px;box-shadow:0 4px 10px rgba(0,0,0,.08);font-weight:bold}
+.balloon-area{position:relative;width:100%;height:75vh;overflow:hidden}
+.balloon{
+position:absolute;cursor:pointer;border-radius:52% 52% 48% 48%;
+box-shadow:0 15px 25px rgba(0,0,0,.08), inset -8px -12px 18px rgba(0,0,0,.06);
+animation:float 4s ease-in-out infinite;
+}
+.green{background:linear-gradient(145deg,#9baa75,#839360)}
+.brown{background:linear-gradient(145deg,#c09567,#a67c52)}
+.gold{background:linear-gradient(145deg,#efd15a,#dcb93f)}
+.shine{position:absolute;top:16px;left:16px;width:24px;height:38px;background:rgba(255,255,255,.35);border-radius:50%;transform:rotate(-20deg)}
+.knot{position:absolute;left:50%;bottom:-8px;width:12px;height:12px;background:inherit;transform:translateX(-50%) rotate(45deg)}
+.string{position:absolute;left:50%;top:calc(100% + 4px);transform:translateX(-50%)}
+.pop{animation:explode .4s forwards!important}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes explode{to{opacity:0;transform:scale(1.4)}}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;padding:20px;z-index:9999}
+.card{background:#fff;padding:15px;border-radius:18px;max-width:90%;width:360px;box-shadow:0 10px 25px rgba(0,0,0,0.3)}
+.photo-container{width:100%;height:280px;background:#111;border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:12px;box-shadow:inset 0 0 20px rgba(0,0,0,0.6)}
+.photo-container img{width:100%;height:100%;object-fit:contain;image-rendering:auto;filter:contrast(1.02) brightness(1.02)}
+.letter,.finalbox{background:#fff;padding:18px;border-radius:18px;max-width:380px;width:100%}
+.letter{margin:10px;text-align:left;box-shadow:0 4px 10px rgba(0,0,0,0.05)}
+.finalbox .photo-container{height:240px}
+</style>
+</head>
+<body>
+
+<section id="welcome" class="screen">
+<h1>Happy Father's Day Papa ❤️</h1>
+<p style="margin-top:12px">A surprise from<br><br><b>Tanu ❤️<br>Chhavi ❤️<br>Nishank ❤️</b></p>
+<button class="btn" onclick="startMagic()">Begin the Magic ✨</button>
+</section>
+
+<section id="game" class="screen hidden">
+<div id="counter" class="counter">🎈 8 Surprises Left</div>
+<div id="balloonArea" class="balloon-area"></div>
+</section>
+
+<section id="letters" class="screen hidden">
+<h1>Letters For Papa ✉️</h1>
+<div class="letter"><b>Tanu ❤️</b><br><br>Your message here.</div>
+<div class="letter"><b>Chhavi ❤️</b><br><br>Your message here.</div>
+<div class="letter"><b>Nishank ❤️</b><br><br>Thank you for everything Papa ❤️</div>
+<button class="btn" onclick="showFinal()">Final Surprise 🎊</button>
+</section>
+
+<section id="final" class="screen hidden">
+<div class="finalbox">
+<h1>We Love You Papa ❤️</h1>
+<div class="photo-container">
+<img src="20260308_1158131.jpg" alt="Family Photo">
+</div>
+<p>Thank you for every sacrifice, lesson, and smile.</p>
+<p style="margin-top:10px"><b>Tanu ❤️ | Chhavi ❤️ | Nishank ❤️</b></p>
+</div>
+</section>
+
+<div id="modal" class="modal">
+<div class="card">
+<div class="photo-container">
+<img id="modalImg" src="" alt="Memory">
+</div>
+<p style="font-weight:bold; color:#555; margin-bottom:5px;">Sweet Memory ❤️</p>
+<button class="btn" style="margin-top:10px; padding:10px 20px;" onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script>
+let left=8;
+
+function startMagic(){
+welcome.classList.add('hidden');
+game.classList.remove('hidden');
+}
+
+// Clean file names mapped directly for your GitHub folder
+const balloonData = [
+  { pos: [10,10], color: "green", img: "IMG-20230509-WA0004.jpg" },
+  { pos: [65,12], color: "brown", img: "IMG-20230616-WA0004.jpg" },
+  { pos: [25,25], color: "gold",  img: "IMG-20230616-WA0005.jpg" },
+  { pos: [75,30], color: "green", img: "IMG-20250402-WA0010.jpg" },
+  { pos: [10,50], color: "brown", img: "IMG-20260620-WA0015.jpg" },
+  { pos: [58,55], color: "gold",  img: "IMG-20260620-WA0016.jpg" },
+  { pos: [30,68], color: "green", img: "IMG-20260620-WA0017.jpg" },
+  { pos: [74,68], color: "brown", img: "WhatsApp Image 2026-06-21 at 10.02.36 AM.jpg" }
+];
+
+const area=document.getElementById("balloonArea");
+const modal=document.getElementById("modal");
+const modalImg=document.getElementById("modalImg");
+
+balloonData.forEach((data, i)=>{
+const b=document.createElement("div");
+b.className="balloon "+data.color;
+
+const size=88+Math.random()*22;
+b.style.width=size+"px";
+b.style.height=(size*1.25)+"px";
+b.style.left=data.pos[0]+"%";
+b.style.top=data.pos[1]+"%";
+
+b.innerHTML=`
+<div class="shine"></div>
+<div class="knot"></div>
+<div class="string">
+<svg width="45" height="75">
+<path d="${Math.random()>0.5?'M22 0 C 5 20,40 50,18 75':'M22 0 C 40 20,5 50,28 75'}"
+stroke="#777" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>
+</div>`;
+
+b.onclick=()=>{
+if(b.classList.contains('pop')) return;
+b.classList.add('pop');
+
+setTimeout(()=>{
+b.remove();
+left--;
+document.getElementById("counter").innerText='🎈 '+left+' Surprises Left';
+
+modalImg.src = data.img;
+modal.style.display='flex';
+},400);
+};
+
+area.appendChild(b);
+});
+
+function closeModal() {
+modal.style.display='none';
+if(left===0){
+game.classList.add('hidden');
+letters.classList.remove('hidden');
+}
+}
+
+function showFinal(){
+letters.classList.add('hidden');
+final.classList.remove('hidden');
+}
+</script>
+</body>
+</html>
